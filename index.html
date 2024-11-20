@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stumble Guys Fan Page</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: white;
+      background: #ff4b5c;
+      animation: slideDown 1.5s ease-out;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+
+    p {
+      font-size: 1.2rem;
+    }
+
+    /* Animated Buttons */
+    .button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      margin: 2rem 1rem;
+      font-size: 1.2rem;
+      text-decoration: none;
+      color: white;
+      background: #00c6ff;
+      border-radius: 25px;
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .button:hover {
+      transform: scale(1.1);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Characters Section */
+    .characters {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 2rem;
+    }
+
+    .character-card {
+      width: 200px;
+      text-align: center;
+      margin: 1rem;
+      background: white;
+      padding: 1rem;
+      border-radius: 15px;
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+      transform: translateY(50px);
+      opacity: 0;
+      animation: fadeInUp 1s ease-in-out forwards;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .character-card img {
+      width: 100%;
+      border-radius: 15px;
+    }
+
+    /* Cursor Zoom Effect */
+    .zoom {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.5);
+      border: 2px solid #ff4b5c;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: scale(0);
+      transition: transform 0.2s ease-out;
+    }
+
+    /* Animations */
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Stumble Guys Fan Page!</h1>
+    <p>Dive into the ultimate fun of chaos and stumble to victory!</p>
+  </header>
+
+  <section class="characters">
+    <div class="character-card">
+      <img src="main.jpg" alt="Leading Character">
+      <h3>Character 1</h3>
+    </div>
+    <div class="character-card">
+      <img src="plain.jpg" alt="Supporting Character">
+      <h3>Character 2</h3>
+    </div>
+    <div class="character-card">
+      <img src="rain.jpg" alt="Hitting Character">
+      <h3>Character 3</h3>
+    </div>
+  </section>
+
+  <!-- Cursor Zoom Effect -->
+  <div class="zoom"></div>
+
+  <footer style="text-align: center; padding: 1rem; color: white; background: #222;">
+    <p>&copy; 2024 Stumble Guys Fan Page. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Smooth fade-in animation for cards
+    const cards = document.querySelectorAll('.character-card');
+    window.addEventListener('scroll', () => {
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }
+      });
+    });
+
+    // Cursor Zoom Effect
+    const zoom = document.querySelector('.zoom');
+    document.addEventListener('mousemove', (e) => {
+      zoom.style.top = `${e.clientY - 50}px`;
+      zoom.style.left = `${e.clientX - 50}px`;
+    });
+
+    document.addEventListener('mouseenter', () => {
+      zoom.style.transform = 'scale(1)';
+    });
+
+    document.addEventListener('mouseleave', () => {
+      zoom.style.transform = 'scale(0)';
+    });
+
+    // Hover effect for cards
+    cards.forEach(card => {
+      card.addEventListener('mousemove', () => {
+        card.style.transform = 'scale(1.05)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'scale(1)';
+      });
+    });
+  </script>
+</body>
+</html>
